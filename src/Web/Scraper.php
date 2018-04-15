@@ -42,11 +42,6 @@ class Scraper
         return $this->content;
     }
 
-    public static function getAttributeValue(\DOMElement $element, $attribute)
-    {
-        return $element->getAttribute($attribute);
-    }
-
     public static function findElement(\DOMElement $element, string $tag, string $attr, string $val)
     {
         $returnElement = false;
@@ -54,9 +49,7 @@ class Scraper
         /* @var $node \DOMNode */
         foreach ($nodeList as $node) {
             if ($node->hasAttributes()){
-                /* @var $name string
-                 * @var $attrNode \DOMAttr
-                 */
+                /* @var $attrNode \DOMAttr */
                 foreach ($node->attributes as $name => $attrNode) {
                     if ($name == $attr && $attrNode->value == $val){
                         return $returnElement = $attrNode->ownerElement;

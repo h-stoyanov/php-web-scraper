@@ -51,5 +51,7 @@ foreach ($articleElements as $articleElement) {
     $scraper = new Scraper($anchorToFullArticle->getAttribute('href'));
     $fullArticleElement = $scraper->getContent()->getElementsByTagName('article')->item(0);
     $article = new \src\Web\Article($fullArticleElement);
-    $articlesArray[$article->getId()] = $article->getHtml();
+    $articlesArray[$article->getId()] = $article->toArray();
 }
+header('Content-Type: application/json');
+echo json_encode($articlesArray, JSON_UNESCAPED_UNICODE);
